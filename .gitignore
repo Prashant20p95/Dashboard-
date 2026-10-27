@@ -1,0 +1,121 @@
+# ==============================================================================
+# OpsCommand Operations Portal & Dashboard — Git Ignore Rules
+# ==============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# Caches & Temporary build outputs
+.pytest_cache/
+.coverage
+htmlcov/
+*.tmp
+scratch/
+temp_unzip/
+rendered.html
+
+# Node & Next.js
+node_modules/
+.next/
+/out/
+/build/
+package-lock.json
+package.json
+pnpm-lock.yaml
+next-env.d.ts
+next.config.*
+postcss.config.*
+tailwind.config.*
+tsconfig.json
+
+# External / Sibling projects
+purti-creations-repo/
+purti_assets_raw/
+Purti_Creations_*.zip
+src/
+prisma/
+public/
+test_*.jpg
+test_purti_site.py
+start_purti.bat
+AGENTS.md
+GEMINI.md
+
+# Large multimedia, archives & binary documents
+*.mp4
+*.wav
+*.zip
+*.docx
+video_frames/
+final_verification_frames/
+subtitled_verification_frames/
+sample_render/
+card_generator/
+render_cinematic_edit.py
+
+# SQLite databases & journals
+*.db
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# User uploads & generated exports
+uploads/
+
+# Showcase & test HTML files in static
+static/layout_option_*.html
+static/*showcase*.html
+static/test_*.html
+
+# Scratch & test scripts
+verify_*.py
+scratch_*.py
+capture_*.py
+test_*.py
+audit_*.py
+parse_analyze.py
+find_*.py
+list_*.py
+test_*.*
+before_*.png
+after_*.png
+emojis_audit.txt
+user_req_*.txt
+step_*.txt
+apply_*.py
+build_*.py
+generate_*.py
+inspect_*.py
+fix_*.py
+migrate_*.py
+run_*.py
+read_*.py
+transcribe_*.py
+dump_*.py
+scenes.txt
+cleaned_transcript.txt
+transcription.json
+intro_hi.txt
+import_users.py
+ingest_real_influencers.py
+sync_workflow.py
+=
+
+# Agent internal directories
+.agent/
+.agents/
+.antigravity/
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db

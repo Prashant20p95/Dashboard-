@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  opscommand:
+    build: .
+    container_name: opscommand-portal
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - ORGANIZATION_NAME=Global Logistics Operations
+      - PORTAL_TITLE=Operations & Consignment Dispatch Command
+      - PORTAL_SUBTITLE=Pan-Region Hub Logistics & Delivery Verification System
+      - DATABASE_URL=sqlite:///operations.db
+      - AT_RISK_THRESHOLD_DAYS=3
+    volumes:
+      - opscommand_data:/app/uploads
+      - opscommand_db:/app
+
+volumes:
+  opscommand_data:
+  opscommand_db:

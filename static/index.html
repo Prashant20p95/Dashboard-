@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>OpsCommand — Operations &amp; Logistics Command Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css?v=2.0.0">
+</head>
+<body>
+
+  <!-- Top Brand & Command Header -->
+  <header class="app-topbar">
+    <div class="topbar-left">
+      <div class="brand-logo-icon" style="display:flex; align-items:center; justify-content:center; width:34px; height:34px; background:linear-gradient(135deg, #1E3A8A, #2563EB); border-radius:8px; color:#ffffff; margin-right:10px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div class="brand-text-block" style="display:flex; flex-direction:column;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="brand-title" id="brand-title" style="font-weight:700; font-size:16px; letter-spacing:-0.01em;">OpsCommand</span>
+          <span id="brand-env-badge" style="font-size:10px; font-weight:700; background:#EFF6FF; color:#1D4ED8; padding:2px 6px; border-radius:4px; text-transform:uppercase; letter-spacing:0.05em; border:1px solid #BFDBFE;">HQ LIVE</span>
+        </div>
+        <span id="brand-subtitle" style="font-size:11px; color:#64748B; font-weight:500;">Operations &amp; Logistics Portal</span>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <button type="button" onclick="window.openDispatchModal()" class="btn-book-dispatch" title="Record new consignment dispatch">
+        + Book Dispatch
+      </button>
+      <button type="button" onclick="window.exportDashManifest()" class="btn-light-action" title="Export Excel manifest">
+        Export Excel
+      </button>
+      <button type="button" id="btn-operations-summary" onclick="window.openOperationsBriefingModal(this)" class="btn-light-action" title="Consolidated Operations Status &amp; Weekly Schedule">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+          <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h6a1 1 0 100-2H7zm0 4a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+        </svg>
+        <span>Summary</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Horizontal Sub-Navigation Bar Directly Below Header -->
+  <nav class="sub-nav-bar" id="main-tab-bar" aria-label="Main Navigation">
+    <button class="nav-tab active" onclick="window.switchTab('dashboard')" id="tab-dashboard" title="Pan-Region Logistics &amp; Verification Command">
+      <svg class="tab-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+      <span>Operations Dashboard</span>
+    </button>
+    <button class="nav-tab" onclick="window.switchTab('dispatch')" id="tab-dispatch" title="Consignment Booking &amp; Courier Ledger">
+      <svg class="tab-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+      <span>Dispatch Pipeline</span>
+    </button>
+    <button class="nav-tab" onclick="window.switchTab('coordinators')" id="tab-coordinators" title="Stationery &amp; Thermal Shipping Labels">
+      <svg class="tab-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L18 2L18 6L6 6Z"></path><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M6 18L18 18L18 22L6 22Z"></path></svg>
+      <span>Stationery &amp; Labels</span>
+    </button>
+    <button class="nav-tab" onclick="window.switchTab('datastore')" id="tab-datastore" title="SQLite WAL Database Inspector">
+      <svg class="tab-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+      <span>Master Data Store</span>
+    </button>
+    <button class="nav-tab" onclick="window.switchTab('events')" id="tab-events" title="Operations Schedule &amp; Campaign Parameters">
+      <svg class="tab-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+      <span>Campaign Master</span>
+    </button>
+  </nav>
+
+  <!-- Main Shell Inside Workspace -->
+  <main class="shell">
+    <!-- Urgent Alert Container -->
+    <div id="urgent-alert-container"></div>
+
+    <!-- Dynamic Tab Content -->
+    <div id="tab-content"></div>
+  </main>
+
+  <!-- Global Containers -->
+  <div id="toast-container" class="toast-container"></div>
+  <div id="event-drawer-container"></div>
+  <div id="modal-container"></div>
+  <div id="global-loader" class="loader-backdrop hidden"><div class="spinner"></div></div>
+
+  <script src="/static/app.js?v=2.0.0"></script>
+</body>
+</html>
